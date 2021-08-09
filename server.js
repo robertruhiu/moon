@@ -1,22 +1,8 @@
 const express = require('express');
-const path = require('path');
+const app = express();
 
-const history = require('connect-history-api-fallback');
-let expressStaticGzip = require("express-static-gzip");
-
-let app = express();
-
-// app.use(serveStatic(__dirname + "/dist"));
-app.use(history())
-
-
-app.use("/", expressStaticGzip("dist", {
-    enableBrotli: true,
-    orderPreference: ['br','gz']
-}));
+app.use(express.static(__dirname + '/dist'));
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log('Listening on port ' + port)
-});
+app.listen(port);
